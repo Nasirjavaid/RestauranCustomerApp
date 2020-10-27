@@ -294,7 +294,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         // await Future.delayed(Duration(seconds: 2));
         if (myOrdersModel != null) {
           yield OrderPlacedReturnedRecipt(myOrdersModel: myOrdersModel);
-          await Future.delayed(Duration(seconds: 15));
+          await Future.delayed(Duration(seconds: 5));
           yield UpdateFoodProductListWhenAddingNewFoodProductState(
               foodinfo: foodinfoCartList);
         } else {
