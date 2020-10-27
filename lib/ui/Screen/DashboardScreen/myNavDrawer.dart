@@ -14,6 +14,7 @@ import 'package:retaurant_app/repository/userAuthRepository.dart';
 import 'package:retaurant_app/ui/CommomWidgets/circulerImageView.dart';
 import 'package:retaurant_app/ui/CommomWidgets/commonWidgets.dart';
 import 'package:retaurant_app/ui/Screen/MyOrdersScreen/myOrdersScreen.dart';
+import 'package:retaurant_app/ui/Screen/MyReservationsScreen/myReservationsScreen.dart';
 import 'package:retaurant_app/ui/Screen/UserProfileScreen/userProfileScreen.dart';
 import 'package:retaurant_app/ui/Screen/UserProfileScreen/userProfileUpdateScreen.dart';
 import 'package:retaurant_app/ui/Screen/WebViewContainerScreen/webViewContainer.dart';
@@ -143,6 +144,24 @@ class _MyNavDrawerState extends State<MyNavDrawer> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => MyOrdersScreen(),
+                          ),
+                        ),
+                      }),
+              Divider(),
+              SizedBox(
+                height: 0,
+              ),
+              new MyDrawerItems(context).drawerItem(
+                  icon: FontAwesomeIcons.chair,
+                  text: 'My reservations',
+                  onTap: () => {
+                        //clossing the nav drawer after click
+                        Navigator.pop(context),
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MyReservationsScreen(),
                           ),
                         ),
                       }),

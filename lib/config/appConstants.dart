@@ -15,5 +15,5 @@ class APIConstants {
   static final String userProfileUpdateEndpoint = baseUrl + "android/updateprofile";
 
 
-    static final String foodProductItemOfferListEndpoint = baseUrl + "android/offeritem";
+  static final String foodProductItemOfferListEndpoint = baseUrl + "android/offeritem";
 }
