@@ -41,7 +41,7 @@ class _BookNewReservationWidgetState extends State<BookNewReservationWidget> {
             //  maxTime: DateTime(2050, 12, 30),
             onChanged: (date) {
           setState(() {
-            selectedDate = DateFormat('dd-MM-yyyy ').format(date).toString();
+            selectedDate = DateFormat('dd-MM-yyyy').format(date).toString();
           });
         }, onConfirm: (date) { 
           print('confirm $date');

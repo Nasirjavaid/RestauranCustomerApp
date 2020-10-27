@@ -184,9 +184,6 @@ class _CartScreenState extends State<CartScreen> with WidgetsBindingObserver {
 
   Widget cartListViewItemCard(
       UpdateFoodProductListWhenAddingNewFoodProductState state, int index) {
-
-
-        
     return Padding(
       padding: const EdgeInsets.all(2),
       child: Container(
@@ -1259,15 +1256,15 @@ class _CartScreenState extends State<CartScreen> with WidgetsBindingObserver {
             customerPhone: "",
             customerEmail: "",
             customerAddress: "",
-            customerNote: "0",customerId: "");
+            customerNote: "0",
+            customerId: "");
 
         data.customerName = etName.text;
         data.customerPhone = etPhone.text;
         data.customerEmail = etEmail.text;
         data.customerAddress = etAddress.text;
         data.customerNote = etSpecialNote.text;
-        if (userLoginForCartOrderSubmission.message != null
-            ) {
+        if (userLoginForCartOrderSubmission.message != null) {
           data.customerId = userLoginForCartOrderSubmission.data.customerId;
         } else {
           data.customerId = "";
@@ -1322,25 +1319,25 @@ class _CartScreenState extends State<CartScreen> with WidgetsBindingObserver {
 //TODO: Un comment the Cart Billing block
 //this will be called when ever the this state will come
 
-          if (shippingInfoListIndex == null) {
-            if (state.foodinfo.length != 0) {
-              if (state.foodinfo[0].shippingInfoListIndexFormFoodInfo != null) {
-                BlocProvider.of<CartBloc>(context).add(
-                    FoodProductTotalBillCartEvent(
-                        index: state
-                            .foodinfo[0].shippingInfoListIndexFormFoodInfo));
-              } else {
-                BlocProvider.of<CartBloc>(context)
-                    .add(FoodProductTotalBillCartEvent(index: null));
-              }
-            } else {
-              BlocProvider.of<CartBloc>(context)
-                  .add(FoodProductTotalBillCartEvent(index: null));
-            }
-          } else {
-            BlocProvider.of<CartBloc>(context).add(
-                FoodProductTotalBillCartEvent(index: shippingInfoListIndex));
-          }
+          // if (shippingInfoListIndex == null) {
+          //   if (state.foodinfo.length != 0) {
+          //     if (state.foodinfo[0].shippingInfoListIndexFormFoodInfo != null) {
+          //       BlocProvider.of<CartBloc>(context).add(
+          //           FoodProductTotalBillCartEvent(
+          //               index: state
+          //                   .foodinfo[0].shippingInfoListIndexFormFoodInfo));
+          //     } else {
+          //       BlocProvider.of<CartBloc>(context)
+          //           .add(FoodProductTotalBillCartEvent(index: null));
+          //     }
+          //   } else {
+          //     BlocProvider.of<CartBloc>(context)
+          //         .add(FoodProductTotalBillCartEvent(index: null));
+          //   }
+          // } else {
+          //   BlocProvider.of<CartBloc>(context).add(
+          //       FoodProductTotalBillCartEvent(index: shippingInfoListIndex));
+          // }
 
           if (state.foodinfo.length > 0) {
             return Container(
