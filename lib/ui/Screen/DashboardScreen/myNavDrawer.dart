@@ -161,7 +161,7 @@ class _MyNavDrawerState extends State<MyNavDrawer> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => MyReservationsScreen(),
+                            builder: (context) => MyReservationScreenMain(),
                           ),
                         ),
                       }),

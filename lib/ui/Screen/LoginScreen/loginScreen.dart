@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen>
     with TickerProviderStateMixin, WidgetsBindingObserver {
 //Animation for Slider
   AnimationController animationController;
- // final _formKey = GlobalKey();
+  // final _formKey = GlobalKey();
 
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -130,90 +130,90 @@ class _LoginScreenState extends State<LoginScreen>
       return Scaffold(
         key: _scaffoldKey,
         body: Stack(children: [
-        
           Center(
             child: ListView(
+              children: [
+                SizedBox(
+                  height: 120,
+                ),
+                Column(
+                  children: [
+                    //Image logo
+                    Center(
+                      child: Container(
+                          height: 100,
+                          width: 100,
+                          child: Image.asset('assets/images/splash.png')),
+                    ),
+                    SizedBox(height: 30),
 
-                children: [
-                 SizedBox(height: 120,),
-                  Column(
-                    children: [
-                      //Image logo
-                      Center(
-                        child: Container(
-                            height: 100,
-                            width: 100,
-                            child: Image.asset('assets/images/splash.png')),
-                      ),
-                      SizedBox(height: 30),
+                    Container(
+                      child: state is LoginInProgress
+                          ? CommonWidgets.progressIndicator
+                          : loginText(context),
+                    ),
 
-                      Container(
-                        child: state is LoginInProgress
-                            ? CommonWidgets.progressIndicator
-                            : loginText(context),
-                      ),
-
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(left: 20.0, right: 20, top: 50),
-                        child: Column(
-                          children: [
-                            //user name field
-                            userNameInputField(context),
-                            Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: 1.0,
-                              decoration: BoxDecoration(
-                                gradient: new LinearGradient(
-                                    colors: [
-                                      Colors.purpleAccent,
-                                      Colors.redAccent
-                                    ],
-                                    begin: Alignment(1.0, 0.0),
-                                    end: Alignment(0.0, 1.0),
-                                    stops: [0.0, 1.0],
-                                    tileMode: TileMode.clamp),
-                              ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 20.0, right: 20, top: 50),
+                      child: Column(
+                        children: [
+                          //user name field
+                          userNameInputField(context),
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: 1.0,
+                            decoration: BoxDecoration(
+                              gradient: new LinearGradient(
+                                  colors: [
+                                    Colors.purpleAccent,
+                                    Colors.redAccent
+                                  ],
+                                  begin: Alignment(1.0, 0.0),
+                                  end: Alignment(0.0, 1.0),
+                                  stops: [0.0, 1.0],
+                                  tileMode: TileMode.clamp),
                             ),
+                          ),
 
-                            SizedBox(height: 10),
+                          SizedBox(height: 10),
 
-                            //Password field
-                            passwordInputField(context),
-                            Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: 1.0,
-                              decoration: BoxDecoration(
-                                gradient: new LinearGradient(
-                                    colors: [
-                                      Colors.purpleAccent,
-                                      Colors.redAccent
-                                    ],
-                                    begin: Alignment(1.0, 0.0),
-                                    end: Alignment(0.0, 1.0),
-                                    stops: [0.0, 1.0],
-                                    tileMode: TileMode.clamp),
-                              ),
+                          //Password field
+                          passwordInputField(context),
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: 1.0,
+                            decoration: BoxDecoration(
+                              gradient: new LinearGradient(
+                                  colors: [
+                                    Colors.purpleAccent,
+                                    Colors.redAccent
+                                  ],
+                                  begin: Alignment(1.0, 0.0),
+                                  end: Alignment(0.0, 1.0),
+                                  stops: [0.0, 1.0],
+                                  tileMode: TileMode.clamp),
                             ),
-                            SizedBox(height: 30),
+                          ),
+                          SizedBox(height: 30),
 
-                            //login button
+                          //login button
 
-                            loginButton(context),
+                          loginButton(context),
 
-                            SizedBox(height: 30),
-                            forgotPasswordText(context),
-                            SizedBox(height: 15),
-                            registernewAccountText(context),
-                          ],
-                        ),
+                          SizedBox(height: 30),
+                          forgotPasswordText(context),
+                          SizedBox(height: 15),
+                          registernewAccountText(context),
+                        ],
                       ),
-                    ],
-                  ),
-
-                      SizedBox(height: 80,),
-                ],
-              
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 80,
+                ),
+              ],
             ),
           ),
           Column(

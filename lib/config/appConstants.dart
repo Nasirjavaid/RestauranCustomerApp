@@ -14,6 +14,8 @@ class APIConstants {
   static final String passwordRecoveryEndpoint = baseUrl + "android/forgot_password";
   static final String userProfileUpdateEndpoint = baseUrl + "android/updateprofile";
 
+  static final String myReservationEndpoint = baseUrl + "android/myreservation";
+
 
   static final String foodProductItemOfferListEndpoint = baseUrl + "android/offeritem";
 }
