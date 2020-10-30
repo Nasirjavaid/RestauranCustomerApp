@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:retaurant_app/model/myReservationModel.dart';
 
 class ReservationsListViewWidet extends StatefulWidget {
+
+  final MyReserveListModel myReserveListModel;
+  ReservationsListViewWidet({this.myReserveListModel});
   @override
   _ReservationsListViewWidetState createState() =>
       _ReservationsListViewWidetState();
@@ -17,28 +21,27 @@ class _ReservationsListViewWidetState extends State<ReservationsListViewWidet> {
       child: Padding(
         padding: const EdgeInsets.only(top: 5.0, right: 5, left: 5, bottom: 1),
         child: ListView.builder(
-            itemCount: 10,
+            itemCount: widget.myReserveListModel.data.reserveinfo.length,
             scrollDirection: Axis.vertical,
             itemBuilder: (BuildContext context, int index) {
-              // if (orderInfoList.length == 0) {
-              //   return Center(
-              //       child: Padding(
-              //     padding: const EdgeInsets.only(top: 10.0),
-              //     child: Text("No orders",
-              //         style: Theme.of(context).textTheme.bodyText1),
-              //   )); 
-              // } else {
-              //   return orderInfoListItemCard(
-              //       context, orderInfoList[index], data);
-              // }
+              if (widget.myReserveListModel.data.reserveinfo.length == 0) {
+                return Center(
+                    child: Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: Text("No Previous Reservations.",
+                      style: Theme.of(context).textTheme.bodyText1),
+                ));
+              } else {
+               return reservationListCard(context , widget.myReserveListModel.data.reserveinfo[index]);
+              }
 
-              return reservationListCard(context);
+              
             }),
       ),
     );
   }
 
-  Widget reservationListCard(BuildContext context) {
+  Widget reservationListCard(BuildContext context,Reserveinfo reserveinfo) {
     return Container(
       child: Card(
         elevation: 5,
@@ -59,7 +62,7 @@ class _ReservationsListViewWidetState extends State<ReservationsListViewWidet> {
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
                     Text(
-                      "1",
+                      "${reserveinfo.tableName !=null ? reserveinfo.tableName : "-"}",
                       style: Theme.of(context)
                           .textTheme
                           .button
@@ -79,7 +82,7 @@ class _ReservationsListViewWidetState extends State<ReservationsListViewWidet> {
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
                     Text(
-                      "3",
+                      "${reserveinfo.capacity !=null ? reserveinfo.capacity : "-"}",
                       style: Theme.of(context)
                           .textTheme
                           .button
@@ -103,7 +106,7 @@ class _ReservationsListViewWidetState extends State<ReservationsListViewWidet> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          "2 PM",
+                          "${reserveinfo.formtime !=null ? reserveinfo.formtime :"-"}",
                           style: Theme.of(context)
                               .textTheme
                               .button
@@ -120,7 +123,7 @@ class _ReservationsListViewWidetState extends State<ReservationsListViewWidet> {
                           width: 5,
                         ),
                         Text(
-                          "4 PM",
+                          "${reserveinfo.totime !=null ? reserveinfo.totime : "-"}",
                           style: Theme.of(context)
                               .textTheme
                               .button
@@ -142,7 +145,7 @@ class _ReservationsListViewWidetState extends State<ReservationsListViewWidet> {
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
                     Text(
-                      "20-10-2020",
+                      "${reserveinfo.reserveday !=null ? reserveinfo.reserveday :"-"}",
                       style: Theme.of(context)
                           .textTheme
                           .button
@@ -162,7 +165,7 @@ class _ReservationsListViewWidetState extends State<ReservationsListViewWidet> {
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
                     Text(
-                      "Gone",
+                      "${reserveinfo.status !=null ? reserveinfo.status :"-"}",
                       style: Theme.of(context).textTheme.button.copyWith(
                           fontWeight: FontWeight.w900, color: Colors.red),
                     )

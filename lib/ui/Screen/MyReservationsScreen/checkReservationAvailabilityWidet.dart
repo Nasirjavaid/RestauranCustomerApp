@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:retaurant_app/bloc/myReservationBloc/myReservationEvent.dart';
+import 'package:retaurant_app/bloc/myReservationBloc/myReservetionBloc.dart';
 import 'package:retaurant_app/config/appTheme.dart';
 import 'package:retaurant_app/config/methods.dart';
 import 'package:retaurant_app/config/networkConectivity.dart';
@@ -12,9 +15,43 @@ class CheckReservationAvailabilityWidget extends StatefulWidget {
       _CheckReservationAvailabilityWidgetState();
 }
 
-class _CheckReservationAvailabilityWidgetState extends State<CheckReservationAvailabilityWidget> {
+class _CheckReservationAvailabilityWidgetState
+    extends State<CheckReservationAvailabilityWidget> {
   String selectedDate;
   String selectedTime;
+  TextEditingController etPerson = TextEditingController();
+
+  void _showToast(BuildContext context, String message) {
+    final scaffold = Scaffold.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        duration: Duration(milliseconds: 2000),
+        backgroundColor: AppTheme.appDefaultColor,
+        content:
+            Text("$message", style: TextStyle(fontWeight: FontWeight.w700)),
+      ),
+    );
+  }
+
+  _submitButtonPressed() {
+    if (etPerson.text == null || etPerson.text.isEmpty) {
+      _showToast(context, "Please enter total person.");
+    } else if (selectedTime == null || selectedTime.isEmpty) {
+      _showToast(context, "Please select time.");
+    } else if (selectedDate == null || selectedDate.isEmpty) {
+         _showToast(context, "Please select date.");
+    } else {
+      BlocProvider.of<MyReservationBloc>(context).add(
+        MyReservationEventCheckTableAvailabilty(
+            person: etPerson.text,
+            reserveDate: selectedDate,
+            reserveTime: selectedTime),
+      );
+    }
+
+   
+  }
+
   @override
   Widget build(BuildContext context) {
     return _buildBody(context);
@@ -131,7 +168,7 @@ class _CheckReservationAvailabilityWidgetState extends State<CheckReservationAva
       width: MediaQuery.of(context).size.width * 0.8,
       height: MediaQuery.of(context).size.height * 0.06,
       child: new TextField(
-          // controller: etName,
+          controller: etPerson,
           expands: false,
           maxLines: 1,
           minLines: 1,
@@ -202,7 +239,7 @@ class _CheckReservationAvailabilityWidgetState extends State<CheckReservationAva
                 //         style: Theme.of(context).textTheme.bodyText2.copyWith(
                 //             fontWeight: FontWeight.w600, color: Colors.white)),
 
-                child: Text("Check out",
+                child: Text("Check Reservation",
                     style: Theme.of(context).textTheme.bodyText2.copyWith(
                         fontWeight: FontWeight.w600, color: Colors.white)),
               ),
@@ -211,6 +248,7 @@ class _CheckReservationAvailabilityWidgetState extends State<CheckReservationAva
 
                 NetworkConnectivity.check().then((internet) {
                   if (internet) {
+                    _submitButtonPressed();
                   } else {
                     //show network erro
 
