@@ -1,5 +1,6 @@
 import 'package:retaurant_app/model/myOrdersModel.dart';
 import 'package:retaurant_app/model/myReservationModel.dart';
+import 'package:retaurant_app/model/tableBookingModel.dart';
 import 'package:retaurant_app/model/tableInfoModel.dart';
 
 abstract class MyReservationState {
@@ -9,6 +10,11 @@ abstract class MyReservationState {
   // List<Object> get props => [];
 }
 
+
+class MyReservationToShowBookingFormState extends MyReservationState {
+  final Tableinfo tableinfo;
+  MyReservationToShowBookingFormState({this.tableinfo});
+}
 class MyReservationInProgressState extends MyReservationState {}
 
 class CheckReserVationProgressState extends MyReservationState {}
@@ -23,6 +29,16 @@ class MyReservationStateInitialState extends MyReservationState {}
 class MyReservationStateFailureState extends MyReservationState {}
 
 class MyReservationNeedToLoginState extends MyReservationState {}
+
+class MyReservationTableBookingResponceState extends MyReservationState {
+final TableBookingModel tableBookingModel;
+  MyReservationTableBookingResponceState({this.tableBookingModel});
+}
+
+class MyReservationFailedTableBookingState extends MyReservationState {
+final String message;
+  MyReservationFailedTableBookingState({this.message});
+}
 
 class CheckReservationStateSuccessState extends MyReservationState {
   final TableInfoModel tableInfoModel;

@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retaurant_app/bloc/myReservationBloc/myReservationEvent.dart';
 import 'package:retaurant_app/bloc/myReservationBloc/myReservationState.dart';
 import 'package:retaurant_app/model/myReservationModel.dart';
+import 'package:retaurant_app/model/tableBookingModel.dart';
 import 'package:retaurant_app/model/tableInfoModel.dart';
 import 'package:retaurant_app/model/userLogin.dart';
 import 'package:retaurant_app/repository/myReservationRepository.dart';
@@ -56,10 +56,45 @@ class MyReservationBloc extends Bloc<MyReservationEvent, MyReservationState> {
             event.person, event.reserveDate, event.reserveTime);
 
         if (tableInfoModel.data.tableinfo.length != 0) {
+          for (int i = 0; i < tableInfoModel.data.tableinfo.length; i++) {
+            tableInfoModel.data.tableinfo[i].reserveDate = event.reserveDate;
+            tableInfoModel.data.tableinfo[i].reserveTime = event.reserveTime;
+          }
           yield CheckReservationStateSuccessState(
               tableInfoModel: tableInfoModel);
         } else {
           yield CheckReserVationFailureState(message: tableInfoModel.message);
+        }
+      }
+
+      if (event is MyReservationEventToShowBookingForm) {
+        yield MyReservationToShowBookingFormState(tableinfo: event.tableinfo);
+      }
+
+      if (event is MyReservationEventBookNewTable) {
+        TableBookingModel tableBookingModel = TableBookingModel();
+
+        tableBookingModel = await tableInfoRepository.bookNewTable(
+            event.customerId,
+            event.person,
+            event.reserveDate,
+            event.reserveTime,
+            event.endTime,
+            event.name,
+            event.phone,
+            event.tableId,
+            event.email);
+
+        if (tableBookingModel.status == "failed") {
+          yield MyReservationFailedTableBookingState(
+              message: tableBookingModel.message);
+        }
+        if (tableBookingModel.status == "success") {
+          yield MyReservationTableBookingResponceState(
+              tableBookingModel: tableBookingModel);
+        } else {
+          yield CheckReservationStateSuccessState(
+              tableInfoModel: tableInfoModel);
         }
       }
     } catch (ex) {

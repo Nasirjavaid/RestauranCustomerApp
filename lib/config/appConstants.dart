@@ -16,6 +16,7 @@ class APIConstants {
 
   static final String myReservationEndpoint = baseUrl + "android/myreservation";
   static final String tableInfoEndpoint = baseUrl + "android/reservation";
+  static final String tableBookingEndpoint = baseUrl + "android/booking";
 
 
   static final String foodProductItemOfferListEndpoint = baseUrl + "android/offeritem";

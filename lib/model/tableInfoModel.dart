@@ -53,14 +53,24 @@ class Tableinfo {
   String tableName;
   String capacity;
   String tableImage;
+  String reserveDate;
+  String reserveTime;
 
-  Tableinfo({this.tableID, this.tableName, this.capacity, this.tableImage});
+  Tableinfo(
+      {this.tableID,
+      this.tableName,
+      this.capacity,
+      this.tableImage,
+      this.reserveDate,
+      this.reserveTime});
 
   Tableinfo.fromJson(Map<String, dynamic> json) {
     tableID = json['TableID'];
     tableName = json['TableName'];
     capacity = json['Capacity'];
     tableImage = json['TableImage'];
+    reserveDate = json['reserveDate'];
+    reserveTime = json['reserveTime'];
   }
 
   Map<String, dynamic> toJson() {
@@ -69,6 +79,8 @@ class Tableinfo {
     data['TableName'] = this.tableName;
     data['Capacity'] = this.capacity;
     data['TableImage'] = this.tableImage;
+    data['reserveDate'] = this.reserveDate;
+    data['reserveTime'] = this.reserveTime;
     return data;
   }
 }

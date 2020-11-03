@@ -8,15 +8,19 @@ import 'package:retaurant_app/bloc/myReservationBloc/myReservetionBloc.dart';
 import 'package:retaurant_app/config/appTheme.dart';
 import 'package:retaurant_app/config/methods.dart';
 import 'package:retaurant_app/config/networkConectivity.dart';
+import 'package:retaurant_app/model/tableInfoModel.dart';
 
-class CheckReservationAvailabilityWidget extends StatefulWidget {
+class TableBookingFormWidget extends StatefulWidget {
+
+final Tableinfo tableinfo;
+  TableBookingFormWidget({this.tableinfo});
   @override
-  _CheckReservationAvailabilityWidgetState createState() =>
-      _CheckReservationAvailabilityWidgetState();
+  _TableBookingFormWidgetState createState() =>
+      _TableBookingFormWidgetState();
 }
 
-class _CheckReservationAvailabilityWidgetState
-    extends State<CheckReservationAvailabilityWidget> {
+class _TableBookingFormWidgetState
+    extends State<TableBookingFormWidget> {
   String selectedDate;
   String selectedTime;
   TextEditingController etPerson = TextEditingController();
@@ -76,7 +80,7 @@ class _CheckReservationAvailabilityWidgetState
             SizedBox(
               height: 10,
             ),
-            datePickerWidget(context),
+            // datePickerWidget(context),
             SizedBox(
               height: 30,
             ),
@@ -90,41 +94,41 @@ class _CheckReservationAvailabilityWidgetState
     );
   }
 
-  Widget datePickerWidget(BuildContext context) {
-    return FlatButton(
-      highlightColor: Colors.grey.shade300,
-      onPressed: () {
-        DatePicker.showDatePicker(context, showTitleActions: true,
-            // minTime: DateTime(2020, 1, 1),
-            //  maxTime: DateTime(2050, 12, 30),
-            onChanged: (date) {
-          setState(() {
-            selectedDate = DateFormat('dd-MM-yyyy').format(date).toString();
-          });
-        }, onConfirm: (date) {
-          print('confirm $date');
+  // Widget datePickerWidget(BuildContext context) {
+  //   return FlatButton(
+  //     highlightColor: Colors.grey.shade300,
+  //     onPressed: () {
+  //       DatePicker.showDatePicker(context, showTitleActions: true,
+  //           // minTime: DateTime(2020, 1, 1),
+  //           //  maxTime: DateTime(2050, 12, 30),
+  //           onChanged: (date) {
+  //         setState(() {
+  //           selectedDate = DateFormat('dd-MM-yyyy').format(date).toString();
+  //         });
+  //       }, onConfirm: (date) {
+  //         print('confirm $date');
 
-          setState(() {
-            selectedDate = DateFormat('dd-MM-yyyy').format(date).toString();
-          });
-        }, currentTime: DateTime.now(), locale: LocaleType.en);
-      },
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.8,
-        height: MediaQuery.of(context).size.height * 0.06,
-        child: Center(
-            child: selectedDate == null
-                ? myMainCard(
-                    "Select Date",
-                    FontAwesomeIcons.calendar,
-                  )
-                : myMainCard(
-                    selectedDate,
-                    FontAwesomeIcons.calendar,
-                  )),
-      ),
-    );
-  }
+  //         setState(() {
+  //           selectedDate = DateFormat('dd-MM-yyyy').format(date).toString();
+  //         });
+  //       }, currentTime: DateTime.now(), locale: LocaleType.en);
+  //     },
+  //     child: Container(
+  //       width: MediaQuery.of(context).size.width * 0.8,
+  //       height: MediaQuery.of(context).size.height * 0.06,
+  //       child: Center(
+  //           child: selectedDate == null
+  //               ? myMainCard(
+  //                   "Select Date",
+  //                   FontAwesomeIcons.calendar,
+  //                 )
+  //               : myMainCard(
+  //                   selectedDate,
+  //                   FontAwesomeIcons.calendar,
+  //                 )),
+  //     ),
+  //   );
+  // }
 
   Widget timePickerWidget(BuildContext context) {
     return FlatButton(

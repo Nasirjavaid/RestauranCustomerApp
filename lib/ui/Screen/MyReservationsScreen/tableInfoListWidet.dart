@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retaurant_app/bloc/myReservationBloc/myReservationEvent.dart';
+import 'package:retaurant_app/bloc/myReservationBloc/myReservetionBloc.dart';
+import 'package:retaurant_app/config/appTheme.dart';
 import 'package:retaurant_app/model/tableInfoModel.dart';
 import 'package:retaurant_app/ui/CommomWidgets/roundedImageViewWithoutBorderDynamic.dart';
 
@@ -13,6 +17,12 @@ class _TableInfoListWidgetState extends State<TableInfoListWidget> {
   @override
   Widget build(BuildContext context) {
     return listViewWidget(context);
+  }
+
+  _onShowTableBookingFormButtonPressed(Tableinfo tableinfo) {
+    BlocProvider.of<MyReservationBloc>(context).add(
+      MyReservationEventToShowBookingForm(tableinfo:tableinfo),
+    );
   }
 
   Widget listViewWidget(BuildContext context) {
@@ -48,6 +58,8 @@ class _TableInfoListWidgetState extends State<TableInfoListWidget> {
           child: Container(
             width: MediaQuery.of(context).size.width * 0.8,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 RoundedCornerImageViewWithoutBorderDynamic(
                     height: 100,
@@ -58,133 +70,164 @@ class _TableInfoListWidgetState extends State<TableInfoListWidget> {
                 SizedBox(
                   width: 10,
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Table Name",
-                          style: Theme.of(context).textTheme.bodyText2,
-                        ),
-                        Text(
-                          "${tableinfo.tableName != null ? tableinfo.tableName : "-"}",
-                          style: Theme.of(context)
-                              .textTheme
-                              .button
-                              .copyWith(fontWeight: FontWeight.w900),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Capacity",
-                          style: Theme.of(context).textTheme.bodyText2,
-                        ),
-                        Text(
-                          "${tableinfo.capacity != null ? tableinfo.capacity : "-"}",
-                          style: Theme.of(context)
-                              .textTheme
-                              .button
-                              .copyWith(fontWeight: FontWeight.w900),
-                        )
-                      ],
-                    ),
-                    // SizedBox(
-                    //   height: 5,
-                    // ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   crossAxisAlignment: CrossAxisAlignment.start,
-                    //   children: [
-                    //     Text(
-                    //       "Reservation Time",
-                    //       style: Theme.of(context).textTheme.bodyText2,
-                    //     ),
-                    //     Row(
-                    //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //       crossAxisAlignment: CrossAxisAlignment.end,
-                    //       children: [
-                    //         Text(
-                    //           "${reserveinfo.formtime !=null ? reserveinfo.formtime :"-"}",
-                    //           style: Theme.of(context)
-                    //               .textTheme
-                    //               .button
-                    //               .copyWith(fontWeight: FontWeight.w900),
-                    //         ),
-                    //         SizedBox(
-                    //           width: 5,
-                    //         ),
-                    //         Text(
-                    //           " to ",
-                    //           style: Theme.of(context).textTheme.bodyText1,
-                    //         ),
-                    //         SizedBox(
-                    //           width: 5,
-                    //         ),
-                    //         Text(
-                    //           "${reserveinfo.totime !=null ? reserveinfo.totime : "-"}",
-                    //           style: Theme.of(context)
-                    //               .textTheme
-                    //               .button
-                    //               .copyWith(fontWeight: FontWeight.w900),
-                    //         )
-                    //       ],
-                    //     )
-                    //   ],
-                    // ),
-                    // SizedBox(
-                    //   height: 5,
-                    // ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   crossAxisAlignment: CrossAxisAlignment.start,
-                    //   children: [
-                    //     Text(
-                    //       "Reservation Date",
-                    //       style: Theme.of(context).textTheme.bodyText2,
-                    //     ),
-                    //     Text(
-                    //       "${reserveinfo.reserveday !=null ? reserveinfo.reserveday :"-"}",
-                    //       style: Theme.of(context)
-                    //           .textTheme
-                    //           .button
-                    //           .copyWith(fontWeight: FontWeight.w900),
-                    //     )
-                    //   ],
-                    // ),
-                    // SizedBox(
-                    //   height: 5,
-                    // ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   crossAxisAlignment: CrossAxisAlignment.start,
-                    //   children: [
-                    //     Text(
-                    //       "Status",
-                    //       style: Theme.of(context).textTheme.bodyText2,
-                    //     ),
-                    //     Text(
-                    //       "${reserveinfo.status !=null ? reserveinfo.status :"-"}",
-                    //       style: Theme.of(context).textTheme.button.copyWith(
-                    //           fontWeight: FontWeight.w900, color: Colors.red),
-                    //     )
-                    //   ],
-                    // )
-                  ],
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.62,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Table Name",
+                            style: Theme.of(context).textTheme.bodyText2,
+                          ),
+                          // SizedBox(
+                          //   width: MediaQuery.of(context).size.width * 0.44,
+                          // ),
+                          Text(
+                            "${tableinfo.tableName != null ? tableinfo.tableName : "-"}",
+                            style: Theme.of(context).textTheme.button.copyWith(
+                                fontWeight: FontWeight.w900, fontSize: 16),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Capacity",
+                            style: Theme.of(context).textTheme.bodyText2,
+                          ),
+                          // SizedBox(
+                          //   width: MediaQuery.of(context).size.width * 0.48,
+                          // ),
+                          Text(
+                            "${tableinfo.capacity != null ? tableinfo.capacity : "-"}",
+                            style: Theme.of(context).textTheme.button.copyWith(
+                                fontWeight: FontWeight.w900, fontSize: 16),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Reservation Time",
+                            style: Theme.of(context).textTheme.bodyText2,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                "${tableinfo.reserveTime != null ? tableinfo.reserveTime : "-"}",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .button
+                                    .copyWith(fontWeight: FontWeight.w900),
+                              ),
+
+                              // Text(
+                              //   " to ",
+                              //   style: Theme.of(context).textTheme.bodyText1,
+                              // ),
+                              // SizedBox(
+                              //   width: 5,
+                              // ),
+                              // Text(
+                              //   "${reserveinfo.totime !=null ? reserveinfo.totime : "-"}",
+                              //   style: Theme.of(context)
+                              //       .textTheme
+                              //       .button
+                              //       .copyWith(fontWeight: FontWeight.w900),
+                              // )
+                            ],
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Reservation Date",
+                            style: Theme.of(context).textTheme.bodyText2,
+                          ),
+                          Text(
+                            "${tableinfo.reserveDate != null ? tableinfo.reserveDate : "-"}",
+                            style: Theme.of(context)
+                                .textTheme
+                                .button
+                                .copyWith(fontWeight: FontWeight.w900),
+                          )
+                        ],
+                      ),
+                      // SizedBox(
+                      //   height: 5,
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   crossAxisAlignment: CrossAxisAlignment.start,
+                      //   children: [
+                      //     Text(
+                      //       "Status",
+                      //       style: Theme.of(context).textTheme.bodyText2,
+                      //     ),
+                      //     Text(
+                      //       "${reserveinfo.status !=null ? reserveinfo.status :"-"}",
+                      //       style: Theme.of(context).textTheme.button.copyWith(
+                      //           fontWeight: FontWeight.w900, color: Colors.red),
+                      //     )
+                      //   ],
+                      // )
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: tableBookingDialogueBox(context,tableinfo),
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget tableBookingDialogueBox(BuildContext context,Tableinfo tableinfo) {
+    return InkWell(
+      onTap: () {
+        _onShowTableBookingFormButtonPressed(tableinfo);
+      },
+      child: Container(
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+            color: AppTheme.appDefaultColor,
+            borderRadius: BorderRadius.all(Radius.circular(3))),
+        child: Text(
+          "Book Now",
+          style: Theme.of(context)
+              .textTheme
+              .bodyText1
+              .copyWith(color: Colors.white),
         ),
       ),
     );

@@ -16,6 +16,7 @@ import 'package:retaurant_app/ui/CommomWidgets/commonWidgets.dart';
 import 'package:retaurant_app/ui/CommomWidgets/loadingIndicator.dart';
 import 'package:retaurant_app/ui/Screen/MyReservationsScreen/checkReservationAvailabilityWidet.dart';
 import 'package:retaurant_app/ui/Screen/MyReservationsScreen/raservationsListViewWidget.dart';
+import 'package:retaurant_app/ui/Screen/MyReservationsScreen/tableBookingFormWidget.dart';
 import 'package:retaurant_app/ui/Screen/MyReservationsScreen/tableInfoListWidet.dart';
 
 class MyReservationScreenMain extends StatelessWidget {
@@ -119,6 +120,10 @@ class _MyReservationsScreenState extends State<MyReservationsScreen> {
       if (state is CheckReserVationFailureState) {
         _showToast(context, state.message);
         return CheckReservationAvailabilityWidget();
+      }
+
+      if (state is MyReservationToShowBookingFormState) {
+        return TableBookingFormWidget(tableinfo: state.tableinfo,);
       }
 
       return Container();

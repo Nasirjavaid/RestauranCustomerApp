@@ -1319,25 +1319,25 @@ class _CartScreenState extends State<CartScreen> with WidgetsBindingObserver {
 //TODO: Un comment the Cart Billing block
 //this will be called when ever the this state will come
 
-          if (shippingInfoListIndex == null) {
-            if (state.foodinfo.length != 0) {
-              if (state.foodinfo[0].shippingInfoListIndexFormFoodInfo != null) {
-                BlocProvider.of<CartBloc>(context).add(
-                    FoodProductTotalBillCartEvent(
-                        index: state
-                            .foodinfo[0].shippingInfoListIndexFormFoodInfo));
-              } else {
-                BlocProvider.of<CartBloc>(context)
-                    .add(FoodProductTotalBillCartEvent(index: null));
-              }
-            } else {
-              BlocProvider.of<CartBloc>(context)
-                  .add(FoodProductTotalBillCartEvent(index: null));
-            }
-          } else {
-            BlocProvider.of<CartBloc>(context).add(
-                FoodProductTotalBillCartEvent(index: shippingInfoListIndex));
-          }
+          // if (shippingInfoListIndex == null) {
+          //   if (state.foodinfo.length != 0) {
+          //     if (state.foodinfo[0].shippingInfoListIndexFormFoodInfo != null) {
+          //       BlocProvider.of<CartBloc>(context).add(
+          //           FoodProductTotalBillCartEvent(
+          //               index: state
+          //                   .foodinfo[0].shippingInfoListIndexFormFoodInfo));
+          //     } else {
+          //       BlocProvider.of<CartBloc>(context)
+          //           .add(FoodProductTotalBillCartEvent(index: null));
+          //     }
+          //   } else {
+          //     BlocProvider.of<CartBloc>(context)
+          //         .add(FoodProductTotalBillCartEvent(index: null));
+          //   }
+          // } else {
+          //   BlocProvider.of<CartBloc>(context).add(
+          //       FoodProductTotalBillCartEvent(index: shippingInfoListIndex));
+          // }
 
           if (state.foodinfo.length > 0) {
             return Container(
